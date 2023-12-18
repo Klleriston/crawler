@@ -19,7 +19,7 @@ const port = 3000;
 const apiKey = 'f1cdb1003a7e05c670b29a5aabad3ce1';
 let lon = 10.99;
 let lat = 44.34;
-let cidade;
+let cidade; // zooca lon 10.99 lat 44.34
 app.listen(port, () => {
     console.log(`O servidor está rodando em http://localhost:${port}`);
 });
