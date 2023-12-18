@@ -23,6 +23,7 @@ const apiKey = process.env.OPENWEATHERMAP_API_KEY;
 const mongodbURL = process.env.DB_CONN_STRING;
 let defaultlon = 13.404954;
 let defaultlan = 52.520008;
+let city = "Guarulhos";
 const client = new mongodb_1.MongoClient(mongodbURL);
 app.listen(port, () => {
     console.log(`O servidor está rodando em http://localhost:${port}`);
@@ -33,13 +34,20 @@ app.get('/home', (req, res) => {
 app.get(`/teste`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { lon = defaultlon, lat = defaultlan, cidade } = req.query;
     try {
-        const apiResponse = yield axios_1.default.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`);
+        // const apiResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`);
+        const apiResponse = yield axios_1.default.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
         const weatherData = apiResponse.data;
         const tempCelsius = weatherData.main.temp - 273.15;
+        const tempCelsiusMAX = weatherData.main.temp_max - 273.15;
+        const tempCelsiusMIN = weatherData.main.temp_min - 273.15;
         const tempFormat = parseFloat(tempCelsius.toFixed(1));
+        const temp_MAX_Format = parseFloat(tempCelsiusMAX.toFixed(1));
+        const temp_MIN_Format = parseFloat(tempCelsiusMIN.toFixed(1));
         const respMod = {
             cidade: cidade || weatherData.name,
             temperatura: tempFormat,
+            temperatura_max: temp_MAX_Format,
+            temperatura_min: temp_MIN_Format,
         };
         yield client.connect();
         const db = client.db(process.env.DB_NAME);
