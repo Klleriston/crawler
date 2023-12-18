@@ -7,7 +7,7 @@ const apiKey = 'f1cdb1003a7e05c670b29a5aabad3ce1';
 let lon = 10.99;
 let lat = 44.34;
 
-let cidade
+let cidade // zooca lon 10.99 lat 44.34
 
 app.listen(port, () => {
     console.log(`O servidor está rodando em http://localhost:${port}`);
@@ -21,11 +21,11 @@ app.get(`/teste`, async (req, res) => {
         const apiResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`);
 
         const weatherData = apiResponse.data;
-        const tempCelsius = weatherData.main.tempo - 273.15;
-        const tempFormat = parseFloat(tempCelsius.toFixed(2))
+        const tempCelsius = weatherData.main.temp - 273.15;
+        const tempFormat = parseFloat(tempCelsius.toFixed(1))
         const respMod = {
             cidade: weatherData.name,
-            temperatura: tempFormat, //temperatura Null, arrumar isso
+            temperatura: tempFormat, 
         }
 
         res.json(respMod);

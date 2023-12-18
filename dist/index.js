@@ -30,8 +30,8 @@ app.get(`/teste`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const apiResponse = yield axios_1.default.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`);
         const weatherData = apiResponse.data;
-        const tempCelsius = weatherData.main.tempo - 273.15;
-        const tempFormat = parseFloat(tempCelsius.toFixed(2));
+        const tempCelsius = weatherData.main.temp - 273.15;
+        const tempFormat = parseFloat(tempCelsius.toFixed(1));
         const respMod = {
             cidade: weatherData.name,
             temperatura: tempFormat,
