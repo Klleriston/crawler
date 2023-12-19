@@ -22,11 +22,14 @@ const app = (0, express_1.default)();
 const port = 3000 || process.env.PORT;
 const apiKey = process.env.OPENWEATHERMAP_API_KEY;
 const mongodbURL = process.env.DB_CONN_STRING;
-let defaultlon = 13.404954;
-let defaultlan = 52.520008;
+let defaultlon = -23.5505;
+let defaultlan = -46.6333;
+//sp - liberdade
 const client = new mongodb_1.MongoClient(mongodbURL);
 app.use(express_1.default.json());
-
+app.listen(port, () => {
+    console.log(`O servidor está rodando em http://localhost:${port}`);
+});
 app.get(`/`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { lon = defaultlon, lat = defaultlan, cidade } = req.query;
     try {
@@ -119,7 +122,6 @@ app.post('/insert', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 }));
 const server = aws_serverless_express_1.default.createServer(app);
-// Exporte a função handler para a AWS Lambda
 exports.handler = (event, context) => {
     aws_serverless_express_1.default.proxy(server, event, context);
 };

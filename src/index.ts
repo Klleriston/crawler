@@ -12,8 +12,9 @@ const port = 3000 || process.env.PORT;
 const apiKey = process.env.OPENWEATHERMAP_API_KEY;
 const mongodbURL = process.env.DB_CONN_STRING;
 
-let defaultlon = 13.404954;
-let defaultlan = 52.520008;
+let defaultlon = -23.5505;
+let defaultlan = -46.6333;
+//sp - liberdade
 
 const client = new MongoClient(mongodbURL!)
 app.use(express.json());
