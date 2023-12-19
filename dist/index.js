@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const aws_serverless_express_1 = __importDefault(require("aws-serverless-express"));
 const express_1 = __importDefault(require("express"));
 const axios_1 = __importDefault(require("axios"));
 const mongodb_1 = require("mongodb");
@@ -119,3 +120,7 @@ app.post('/insert', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         yield client.close();
     }
 }));
+const server = aws_serverless_express_1.default.createServer(app);
+exports.handler = (event, context) => {
+    aws_serverless_express_1.default.proxy(server, event, context);
+};
