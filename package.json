@@ -2,14 +2,14 @@
   "name": "crawler",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "npm run build && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
   "keywords": [],
-  "author": "",
+  "author": "Klleriston andrade",
   "license": "ISC",
   "devDependencies": {
     "@types/aws-serverless-express": "^3.3.9",
@@ -20,6 +20,7 @@
   "dependencies": {
     "aws-lambda": "^1.0.7",
     "aws-serverless-express": "^3.4.0",
+    "aws-xray-sdk": "^3.5.3",
     "axios": "^1.6.2",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
